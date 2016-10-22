@@ -28,6 +28,7 @@ class GW_Admin_Bar_Form_Manager {
 		add_action( 'admin_bar_menu', array( $this, 'enhance_admin_bar' ) );
 
 		require_once( 'includes/admin-bar-form-manager-new-form.php' );
+		require_once( 'includes/admin-bar-form-manager-export-form.php' );
 
 	}
 

@@ -7,7 +7,7 @@
  * Version: 0.1
  * Author URI: http://ounceoftalent.com
  */
-class GW_ABFM_New_Form {
+class GW_ABFM_Import_Form {
 
 	public $form_title_base    = 'Test Form';
 	public $use_roman_numerals = true;
@@ -32,7 +32,7 @@ class GW_ABFM_New_Form {
 
 		$item = wp_parse_args( array(
 			'id' => sanitize_title_with_dashes( 'add-new-form' ),
-			'title' => sprintf( '<span style="opacity:0.3;">cmd:</span> %s', __( 'Add New Form' ) ),
+			'title' => sprintf( '<span style="opacity:0.3;">command:</span> %s', __( 'Add New Form' ) ),
 			'href' => add_query_arg( array(
 				'page'     => 'gf_new_form',
 				'auto_add' => true
@@ -72,8 +72,7 @@ class GW_ABFM_New_Form {
 
 		foreach( $forms as $form ) {
 
-			$title_bits = explode( ' ', $form->title );
-			$number = array_pop( $title_bits );
+			$number = call_user_func( 'array_pop', explode( ' ', $form->title ) );
 
 			if( $this->use_roman_numerals ) {
 				$number = $this->convert_roman_to_numeric( $number );
@@ -163,8 +162,8 @@ class GW_ABFM_New_Form {
 
 }
 
-function gw_abfm_new_form() {
+function gw_abfm_import_form() {
 	return GW_ABFM_New_Form::get_instance();
 }
 
-gw_abfm_new_form();
+//gw_abfm_import_form();
