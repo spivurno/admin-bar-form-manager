@@ -23,19 +23,17 @@ class GW_ABFM_Import_Form {
 	private function __construct() {
 
 		add_filter( 'gwabfm_menu_items', array( $this, 'add_menu_item' ), 10, 2 );
-		add_action( 'load-forms_page_gf_new_form', array( $this, 'maybe_add_new_form' ) );
-		add_action( 'load-forms1_page_gf_new_form', array( $this, 'maybe_add_new_form' ) ); // @hack: if GF has updated, it will be included as a 1 in the menu label
 
 	}
 
 	public function add_menu_item( $items, $defaults ) {
 
 		$item = wp_parse_args( array(
-			'id' => sanitize_title_with_dashes( 'add-new-form' ),
-			'title' => sprintf( '<span style="opacity:0.3;">command:</span> %s', __( 'Add New Form' ) ),
+			'id' => sanitize_title_with_dashes( 'import-form' ),
+			'title' => sprintf( '<span style="opacity:0.3;">cmd:</span> %s', __( 'Import Form' ) ),
 			'href' => add_query_arg( array(
-				'page'     => 'gf_new_form',
-				'auto_add' => true
+				'page' => 'gf_export',
+				'view' => 'import_form',
 			), admin_url( 'admin.php' ) ),
 			'meta' => array( 'class' => '' )
 		), $defaults );
@@ -163,7 +161,7 @@ class GW_ABFM_Import_Form {
 }
 
 function gw_abfm_import_form() {
-	return GW_ABFM_New_Form::get_instance();
+	return GW_ABFM_Import_Form::get_instance();
 }
 
-//gw_abfm_import_form();
+gw_abfm_import_form();
